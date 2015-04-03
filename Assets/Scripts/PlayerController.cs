@@ -5,8 +5,8 @@ public class PlayerController : MonoBehaviour {
 	public float speed = 15.0f;
 	public float padding = 1; 
 	
-	private float xmax = -5;
-	private float xmin = 5;
+	private float xmax = -6;
+	private float xmin = 6;
 	
 	void Start (){
 		Camera camera = Camera.main;
