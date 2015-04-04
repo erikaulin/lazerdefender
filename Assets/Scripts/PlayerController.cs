@@ -2,6 +2,8 @@
 using System.Collections;
 
 public class PlayerController : MonoBehaviour {
+	public GameObject laser;
+	
 	public float speed = 15.0f;
 	public float padding = 1; 
 	
@@ -16,6 +18,9 @@ public class PlayerController : MonoBehaviour {
 	}
 	
 	void Update () {
+		if (Input.GetKeyDown(KeyCode.Space)){
+			Instantiate(laser, transform.position, Quaternion.identity);
+		}
 		if(Input.GetKey(KeyCode.LeftArrow)){
 			transform.position = new Vector3(
 				Mathf.Clamp(transform.position.x - speed * Time.deltaTime, xmin, xmax),
