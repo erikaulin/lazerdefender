@@ -18,13 +18,7 @@ public class FormationController : MonoBehaviour {
 		float distance = transform.position.z - camera.transform.position.z;
 		boundaryLeftEdge = camera.ViewportToWorldPoint(new Vector3(0,0,distance)).x + padding;
 		boundaryRightEdge = camera.ViewportToWorldPoint(new Vector3(1,1,distance)).x - padding;
-		SpawnEnemies();
-	}
-	void SpawnEnemies(){
-		foreach (Transform position in transform){
-			GameObject enemy = Instantiate(enemyPrefab, position.transform.position, Quaternion.identity) as GameObject;
-			enemy.transform.parent = position;
-		}
+		SpawnUntillFull();
 	}
 	
 	void SpawnUntillFull(){
