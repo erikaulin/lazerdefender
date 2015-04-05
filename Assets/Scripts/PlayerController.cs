@@ -60,10 +60,16 @@ public class PlayerController : MonoBehaviour {
 			missile.Hit();
 			AudioSource.PlayClipAtPoint (playerShields, transform.position, 0.4f);
 			if (health <= 0) {
-				Destroy(gameObject);
-				AudioSource.PlayClipAtPoint (playerDies, transform.position, 0.4f);
+				Die();
 			}
 		}
+	}
+	
+	void Die(){
+		AudioSource.PlayClipAtPoint (playerDies, transform.position, 0.4f);
+		LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+		man.LoadLevel("Win Screen");
+		Destroy(gameObject);
 	}
 }
 
