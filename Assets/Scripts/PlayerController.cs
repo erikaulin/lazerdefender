@@ -6,9 +6,11 @@ public class PlayerController : MonoBehaviour {
 	public float projectileSpeed = 10;
 	public float projectileRepeatRate = 0.2f;
 	public float health = 250;
-	
 	public float speed = 15.0f;
-	public float padding = 1; 
+	public float padding = 1;
+	public AudioClip playerFire;
+	public AudioClip playerShields;
+	public AudioClip playerDies;
 	
 	private float xmax = -5;
 	private float xmin = 5;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 		Vector3 offset = new Vector3(0, 1, 0);
 		GameObject beam = Instantiate(laser, transform.position+offset, Quaternion.identity) as GameObject;
 		beam.rigidbody2D.velocity = new Vector3(0, projectileSpeed,0);
+		AudioSource.PlayClipAtPoint (playerFire, transform.position, 0.4f);
 	}
 	
 	void Update () {
@@ -55,8 +58,10 @@ public class PlayerController : MonoBehaviour {
 			//Debug.Log("Hit by a projectile");
 			health -= missile.GetDamage();
 			missile.Hit();
+			AudioSource.PlayClipAtPoint (playerShields, transform.position, 0.4f);
 			if (health <= 0) {
 				Destroy(gameObject);
+				AudioSource.PlayClipAtPoint (playerDies, transform.position, 0.4f);
 			}
 		}
 	}
