@@ -3,6 +3,10 @@ using System.Collections;
 
 public class PlayerController : MonoBehaviour {
 	public GameObject laser;
+	public GameObject EnemyShot;
+	public GameObject explode;
+	public float shotFadeTime = 0.1f;
+	public float destoyedFadeTime = 0.4f;
 	public float projectileSpeed = 10;
 	public float projectileRepeatRate = 0.2f;
 	public float health = 250;
@@ -59,14 +63,24 @@ public class PlayerController : MonoBehaviour {
 			health -= missile.GetDamage();
 			missile.Hit();
 			AudioSource.PlayClipAtPoint (playerShields, transform.position, 0.4f);
+			//Vector3 startPosition = transform.position + new Vector3(0,0,0);
+			//Instantiate(EnemyShot, startPosition, Quaternion.identity);
+			Hit();
 			if (health <= 0) {
 				Die();
 			}
 		}
 	}
+
+	void Hit () {
+		GameObject clone = (GameObject)Instantiate (EnemyShot, transform.position, Quaternion.identity);
+		Destroy (clone, shotFadeTime);
+	}
 	
 	void Die(){
 		AudioSource.PlayClipAtPoint (playerDies, transform.position, 0.4f);
+		GameObject destoryed = (GameObject)Instantiate (explode, transform.position, Quaternion.identity);
+		Destroy (destoryed, destoyedFadeTime);
 		LevelManager man = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 		man.LoadLevel("Win Screen");
 		Destroy(gameObject);
