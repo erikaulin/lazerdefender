@@ -63,8 +63,6 @@ public class PlayerController : MonoBehaviour {
 			health -= missile.GetDamage();
 			missile.Hit();
 			AudioSource.PlayClipAtPoint (playerShields, transform.position, 0.4f);
-			//Vector3 startPosition = transform.position + new Vector3(0,0,0);
-			//Instantiate(EnemyShot, startPosition, Quaternion.identity);
 			Hit();
 			if (health <= 0) {
 				Die();
